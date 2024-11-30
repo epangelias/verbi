@@ -427,16 +427,15 @@ export default function InfoBox({ infoBoxState }: InfoBoxProps) {
   let html = useSignal('');
   const tabs = infoTabs.filter((tab) => tab.purpose == filterPurpose);
 
-  const hide = !infoBoxState.bibleState.selectedVerse.value &&
-    !infoBoxState.bibleState.selectedWord.value;
-
   const verses = infoBoxState.bibleState.chapterData.value?.verses || [];
 
   const selectionContent = infoBoxState.bibleState.selectedWord.value ||
     verses.find((v) => v.verse == infoBoxState.bibleState.selectedVerse.value)?.text;
 
   useEffect(() => {
-    infoBoxState.openTab(infoTabs.indexOf(tabs[0]));
+    const hide = !infoBoxState.bibleState.selectedVerse.value &&
+      !infoBoxState.bibleState.selectedWord.value;
+    if (!hide) infoBoxState.openTab(infoTabs.indexOf(tabs[0]));
   }, [selectionContent]);
 
   useEffect(() => render, [infoBoxState.responseContent.value]);

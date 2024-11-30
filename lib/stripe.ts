@@ -53,7 +53,6 @@ export async function GetStripeWebhookEvent(ctx: FreshContext) {
   if (!isStripeEnabled()) throw new HttpError(STATUS_CODE.NotFound);
 
   const body = await ctx.req.text();
-  console.log(body);
   const signature = ctx.req.headers.get('stripe-signature');
   if (signature === null) {
     throw new HttpError(STATUS_CODE.BadRequest, '`Stripe-Signature` header is missing');
