@@ -9,7 +9,7 @@ async function createProduct(stripe: Stripe) {
     name: 'Premium',
     description: 'Unlock premium features.',
     default_price_data: {
-      unit_amount: 470,
+      unit_amount: 600,
       currency: 'usd',
       recurring: {
         interval: 'month',

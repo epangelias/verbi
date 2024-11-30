@@ -427,10 +427,8 @@ export default function InfoBox({ infoBoxState }: InfoBoxProps) {
   let html = useSignal('');
   const tabs = infoTabs.filter((tab) => tab.purpose == filterPurpose);
 
-  if (
-    !infoBoxState.bibleState.selectedVerse.value &&
-    !infoBoxState.bibleState.selectedWord.value
-  ) return <></>;
+  const hide = !infoBoxState.bibleState.selectedVerse.value &&
+    !infoBoxState.bibleState.selectedWord.value;
 
   const verses = infoBoxState.bibleState.chapterData.value?.verses || [];
 

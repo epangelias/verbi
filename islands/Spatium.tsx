@@ -15,7 +15,10 @@ export function Spatium() {
     bibleState.bibleId = 'LATVUL';
     bibleState.bookId = 'Genesis';
     bibleState.chapterId = 1;
-    if (IS_BROWSER) bibleState.loadChapter();
+    if (IS_BROWSER) {
+      bibleState.loadFromLocalStorage();
+      bibleState.loadChapter();
+    }
   }, []);
 
   return (

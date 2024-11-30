@@ -20,26 +20,58 @@ export class BibleState {
   selectedVerse = useSignal<number>();
   scriptioContinua = useSignal(false);
 
+  saveToLocalStorage() {
+    localStorage.setItem('bibleId', this.bibleId!);
+    localStorage.setItem('bookId', this.bookId!);
+    localStorage.setItem('chapterId', this.chapterId!.toString());
+    localStorage.setItem('selectedWord', this.selectedWord.value || '');
+    localStorage.setItem('selectedWordVerse', this.selectedWordVerse.value?.toString() || '');
+    localStorage.setItem('selectedVerse', this.selectedVerse.value?.toString() || '');
+    localStorage.setItem('scriptioContinua', this.scriptioContinua.value.toString());
+  }
+
+  loadFromLocalStorage() {
+    const bibleId = localStorage.getItem('bibleId');
+    if (bibleId) this.bibleId = bibleId;
+    const bookId = localStorage.getItem('bookId');
+    if (bookId) this.bookId = bookId;
+    const chapterId = localStorage.getItem('chapterId');
+    if (chapterId) this.chapterId = parseInt(chapterId);
+    const selectedWord = localStorage.getItem('selectedWord');
+    if (selectedWord) this.selectedWord.value = selectedWord;
+    const selectedWordVerse = localStorage.getItem('selectedWordVerse');
+    if (selectedWordVerse) this.selectedWordVerse.value = parseInt(selectedWordVerse);
+    const selectedVerse = localStorage.getItem('selectedVerse');
+    if (selectedVerse) this.selectedVerse.value = parseInt(selectedVerse);
+    const scriptioContinua = localStorage.getItem('scriptioContinua');
+    if (scriptioContinua) this.scriptioContinua.value = scriptioContinua == 'true';
+    this.loadChapter();
+  }
+
   async loadChapter() {
     try {
       if (!this.bibleId || !this.bookId || !this.chapterId) return;
       this.bookList = await this.verbumState.getBookList(this.bibleId);
-      this.chapterData.value = await this.verbumState.getVerses(
+      const chapterData = await this.verbumState.getVerses(
         this.bibleId,
         this.bookId,
         this.chapterId,
       );
+      if (!chapterData) return;
+      this.chapterData.value = chapterData;
       this.chapters.value = new Array(
         this.bookList.find((b) => b.name === this.bookId)?.chapters,
       ).fill(0).map((_, i) => i + 1);
       this.selectedVerse.value = undefined;
       this.selectedWord.value = undefined;
+      this.saveToLocalStorage();
     } catch (e) {
       this.chapters.value = [];
       this.chapterData.value = { chapter: 0, verses: [] };
-      const newBookId = this.bookList?.at(0)?.name;
-      if (newBookId == this.bookId) return;
-      this.bookId = newBookId;
+      // const newBookId = this.bookList?.at(0)?.name;
+      // if (newBookId == this.bookId) return;
+      // this.bookId = newBookId;
+      return;
       this.loadChapter();
     }
   }
