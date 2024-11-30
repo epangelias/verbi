@@ -73,6 +73,7 @@ export async function GetStripeWebhookEvent(ctx: FreshContext) {
       cryptoProvider,
     ) as Stripe.Event & { data: { object: { customer: string } } };
   } catch (error) {
+    console.log({ body, signature, signingSecret })
     console.error(error);
     throw new Error('Error handling stripe webhook');
   }
