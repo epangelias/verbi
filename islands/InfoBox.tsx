@@ -3,6 +3,7 @@ import { BibleState } from './Bible.tsx';
 import { useEffect } from 'preact/hooks';
 import { VerbumState } from '@/app/verbumState.ts';
 import { renderMarkdown } from '@/lib/md.ts';
+import { useGlobal } from '@/islands/Global.tsx';
 
 interface InfoTab {
   title: string;
@@ -423,8 +424,10 @@ export class InfoBoxState {
 }
 
 export default function InfoBox({ infoBoxState }: InfoBoxProps) {
+  const global = useGlobal();
+
   const filterPurpose = infoBoxState.bibleState.selectedWord.value ? 'word' : 'verse';
-  let html = useSignal('');
+  const html = useSignal('');
   const tabs = infoTabs.filter((tab) => tab.purpose == filterPurpose);
 
   const verses = infoBoxState.bibleState.chapterData.value?.verses || [];
@@ -466,13 +469,21 @@ export default function InfoBox({ infoBoxState }: InfoBoxProps) {
             {infoTabs.at(infoBoxState.selectedTab?.value)?.title}
           </h3>
           <blockquote>{selectionContent}</blockquote>
-          {infoBoxState.loading.value
-            ? <div className='loader'></div>
-            : (
-              <p dangerouslySetInnerHTML={{ __html: html.value }}>
-                {infoBoxState.responseContent.value}
-              </p>
-            )}
+          {infoBoxState.loading.value ? <div className='loader'></div> : (
+            global.user.value
+              ? (
+                <>
+                  <p dangerouslySetInnerHTML={{ __html: html.value }}>
+                    {infoBoxState.responseContent.value}
+                  </p>
+                </>
+              )
+              : (
+                <p style={{ textAlign: 'center' }}>
+                  <a href='/user/signin'>Sign In</a> to use AI
+                </p>
+              )
+          )}
         </div>
       </div>
     </div>

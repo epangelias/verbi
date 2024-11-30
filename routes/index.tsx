@@ -35,15 +35,7 @@ export const handler = define.handlers({
 export default define.page<typeof handler>(({ data }) => {
   return (
     <Page>
-      {data?.chatData ? <Spatium /> : (
-        <>
-          <h1>{site.name}</h1>
-          <p>{site.description}</p>
-          <p>
-            <a href='/user/signin'>Sign In</a> to chat.
-          </p>
-        </>
-      )}
+      <Spatium />
     </Page>
   );
 });
