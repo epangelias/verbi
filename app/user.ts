@@ -21,7 +21,7 @@ export function createUser(name: string, email: string, password: string) {
         name,
         email,
         password,
-        tokens: 50,
+        tokens: 10,
         isSubscribed: false,
         isEmailVerified: false,
         hasVerifiedEmail: false,
