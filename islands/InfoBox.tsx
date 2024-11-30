@@ -435,9 +435,10 @@ export default function InfoBox({ infoBoxState }: InfoBoxProps) {
   const selectionContent = infoBoxState.bibleState.selectedWord.value ||
     verses.find((v) => v.verse == infoBoxState.bibleState.selectedVerse.value)?.text;
 
+  const hide = !infoBoxState.bibleState.selectedVerse.value &&
+    !infoBoxState.bibleState.selectedWord.value;
+
   useEffect(() => {
-    const hide = !infoBoxState.bibleState.selectedVerse.value &&
-      !infoBoxState.bibleState.selectedWord.value;
     if (!hide) infoBoxState.openTab(infoTabs.indexOf(tabs[0]));
   }, [selectionContent]);
 
@@ -469,21 +470,23 @@ export default function InfoBox({ infoBoxState }: InfoBoxProps) {
             {infoTabs.at(infoBoxState.selectedTab?.value)?.title}
           </h3>
           <blockquote>{selectionContent}</blockquote>
-          {infoBoxState.loading.value ? <div className='loader'></div> : (
-            global.user.value
-              ? (
-                <>
-                  <p dangerouslySetInnerHTML={{ __html: html.value }}>
-                    {infoBoxState.responseContent.value}
+          {hide
+            ? <p style={{ textAlign: 'center' }}>Select a word, or select it again to select the verse.</p>
+            : (infoBoxState.loading.value ? <div className='loader'></div> : (
+              global.user.value
+                ? (
+                  <>
+                    <p dangerouslySetInnerHTML={{ __html: html.value }}>
+                      {infoBoxState.responseContent.value}
+                    </p>
+                  </>
+                )
+                : (
+                  <p style={{ textAlign: 'center' }}>
+                    <a href='/user/signin'>Sign In</a> to use AI
                   </p>
-                </>
-              )
-              : (
-                <p style={{ textAlign: 'center' }}>
-                  <a href='/user/signin'>Sign In</a> to use AI
-                </p>
-              )
-          )}
+                )
+            ))}
         </div>
       </div>
     </div>
