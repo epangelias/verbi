@@ -73,7 +73,8 @@ export async function GetStripeWebhookEvent(ctx: FreshContext) {
       cryptoProvider,
     ) as Stripe.Event & { data: { object: { customer: string } } };
   } catch (error) {
-    throw new HttpError(STATUS_CODE.InternalServerError, 'Error handling stripe webhook');
+    console.error(error);
+    throw new Error('Error handling stripe webhook');
   }
 }
 
