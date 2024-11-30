@@ -12,7 +12,7 @@ export const handler = define.handlers({
     if (!(user.tokens > 0 || user.isSubscribed)) throw new HttpError(STATUS_CODE.PaymentRequired);
     const { prompt } = await ctx.req.json();
     const completion = await generateChatCompletion(undefined, [{ role: 'system', content: prompt }]);
-    await setUserData({ ...user, tokens: user.tokens - 1 });
+    if (!user.isSubscribed) await setUserData({ ...user, tokens: user.tokens - 1 });
     return new Response(completion.choices[0].message.content);
   },
 });
