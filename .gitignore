@@ -1,0 +1,10 @@
+.env
+
+_fresh/
+
+node_modules/
+vendor/
+
+.archive
+
+.github

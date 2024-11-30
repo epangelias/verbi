@@ -1,0 +1,224 @@
+.content-center {
+    margin: 0 auto;
+    max-width: 880px;
+}
+
+main,
+.spatium,
+body,
+html {
+    height: 100%;
+}
+
+.spatium {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bible-selector {
+    padding: .3rem;
+    z-index: 100;
+
+    .content-center {
+        justify-content: center;
+        display: flex;
+        gap: .5rem;
+
+        * {
+            padding: .3rem .6rem;
+            font-size: 1rem;
+            text-align: center;
+
+            &.lang {
+                &::after {
+                    content: "ENG";
+                    display: block;
+                    height: 0;
+                    opacity: 0;
+                    user-select: none;
+                    -webkit-user-select: none;
+                }
+            }
+
+            &.book {
+                flex: 1;
+                max-width: 200px;
+                width: 70px;
+            }
+        }
+    }
+
+}
+
+
+.bible {
+    flex: 1;
+    padding: .5rem;
+    overflow-y: auto;
+    user-select: none;
+
+
+    .verses {
+        .verse {
+            &[data-continua="true"] {
+                font-family: 'Times New Roman', Times, serif;
+            }
+
+            margin-left: 1.1rem;
+
+            .verse-number {
+                user-select: none;
+                -webkit-user-select: none;
+                display: inline-block;
+                position: relative;
+                left: -1rem;
+                top: .27rem;
+                width: 0;
+                opacity: 0.7;
+                font-size: .6em;
+                color: CanvasText;
+                word-break: normal;
+                word-wrap: normal;
+                float: left;
+
+                &[data-note="true"] {
+                    color: color-mix(in srgb, yellow, CanvasText 30%);
+                    opacity: 1;
+                    font-weight: bold;
+                }
+            }
+
+            p {
+                margin: .5rem 0;
+                line-height: 1.25;
+                word-wrap: break-word;
+            }
+
+            &[data-selected="true"] {
+                background-color: HighLight;
+                outline: 2px solid HighLight;
+                border-radius: 2px;
+                color: HighLightText;
+            }
+        }
+
+        .note {
+            font-size: .8em;
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-left: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .note-icon {
+            margin-left: .5rem;
+            opacity: 0.5;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .word {
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+
+            &[data-selected="true"] {
+                background-color: HighLight;
+                outline: 2px solid HighLight;
+                border-radius: 2px;
+                color: HighLightText;
+            }
+        }
+    }
+}
+
+
+
+.info-box {
+    z-index: 100;
+    border-top: 1px solid CanvasText;
+    outline: 2px solid Canvas;
+    /* flex: 0.5; */
+    height: 50%;
+    max-height: 250px;
+    overflow: hidden;
+
+    .content-center {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .tabs-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            padding: .25rem 1rem;
+            mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tabs {
+                justify-content: center;
+                display: flex;
+                gap: .5rem;
+                width: max-content;
+
+                button {
+                    padding: .3rem .6rem;
+                    font-size: 1rem;
+                    text-align: center;
+
+                    &[data-selected="true"] {
+                        background-color: color-mix(in srgb, var(--color), var(--fg1));
+                    }
+                }
+            }
+        }
+
+        .content {
+            padding: 0 1rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;
+
+            blockquote {
+                text-align: center;
+                font-style: italic;
+                opacity: 0.8;
+                font-size: 0.6em;
+                margin: .25rem;
+                border: none;
+            }
+
+            h3 {
+                margin: .2rem 0;
+                opacity: 0.5;
+                text-align: center;
+            }
+
+            p {
+                margin: .25rem 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .info-box {
+        .button-text {
+            /* display: none; */
+        }
+
+        .button-text,
+        .emoji {
+            font-size: 0.5em;
+        }
+    }
+}
