@@ -36,12 +36,6 @@ export interface State {
   auth?: string;
 }
 
-export interface ChatData {
-  userId: string;
-  messages: AIMessage[];
-}
-
-
 // Verbi
 
 export interface VerseData {

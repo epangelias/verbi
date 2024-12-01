@@ -30,5 +30,5 @@ export function createUser(name: string, email: string, password: string) {
 }
 
 export function deleteUserRelatedData(atomic: Deno.AtomicOperation, user: UserData) {
-    return atomic.delete(['chat', user.id]);
+    // return atomic.delete(['chat', user.id]);
 }
