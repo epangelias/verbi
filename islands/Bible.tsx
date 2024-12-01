@@ -191,6 +191,7 @@ export default function Bible({ bibleState }: BibleProps) {
               data-selected={bibleState.selectedVerse.value ==
                 verse.verse}
               data-continua={bibleState.scriptioContinua.value}
+              key={`${verse.chapter}:${verse.verse}`}
             >
               <p>
                 <span
@@ -201,9 +202,10 @@ export default function Bible({ bibleState }: BibleProps) {
                 </span>
                 <span>
                   {(bibleState.scriptioContinua.value ? verse.text.replaceAll(/[,.:]/g, ' ') : verse.text).split(' ')
-                    .map((word) => (
+                    .map((word, i) => (
                       <>
                         <span
+                          key={`${word}:${i}`}
                           class='word'
                           data-selected={matchWord(
                             word,
