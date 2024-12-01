@@ -37,9 +37,29 @@ const infoTabs: InfoTab[] = [
     showGreek: true,
   },
   {
+    title: 'Verses',
+    icon: '🔍',
+    prompt: 'Quote other verses that include the selected word. Fully quote each verse.',
+    purpose: 'word',
+  },
+  {
     title: 'Jerome',
     icon: '📜',
-    prompt: "St. Jerome's commentary on why he may have translated the word in this way",
+    prompt: "St. Jerome's commentary that elaborates why he translated the word in this way",
+    purpose: 'word',
+  },
+  {
+    title: 'Explain',
+    icon: '🤔',
+    prompt:
+      'Explain the selected word in the context of the selected verse and its significance un understanding the meaning of the verse. Include any relevant historical, cultural, or linguistic information.',
+    purpose: 'word',
+  },
+  {
+    title: 'Alt',
+    icon: '✨',
+    prompt:
+      'Expound upon the unrestrained and profound truths that lay hidden within the word. Reveal the secrets and non-mainstream understanding of the word. The metaphysics, wild theories, profound insights, the esoteric, let nothing be restrained!',
     purpose: 'word',
   },
   {
@@ -56,35 +76,10 @@ const infoTabs: InfoTab[] = [
     purpose: 'word',
   },
   {
-    title: 'Verses',
-    icon: '🔍',
-    prompt: 'Quote other verses that include the selected word. Fully quote each verse.',
-    purpose: 'word',
-  },
-  {
     title: 'Memorize',
     icon: '🧠',
     prompt: 'Help memorize the selected word',
     purpose: 'word',
-  },
-  {
-    title: 'Synonyms',
-    icon: '🔄',
-    prompt: 'List synonyms for the selected word in the same language with meaning.',
-    purpose: 'word',
-  },
-  {
-    title: 'Pronunciation',
-    icon: '🔊',
-    prompt: 'Show pronunciation of the selected word',
-    purpose: 'word',
-  },
-  {
-    title: 'Hebrew Gematria',
-    icon: '🔢',
-    prompt: 'Show the gematria value of the selected Hebrew word.',
-    purpose: 'word',
-    showHebrew: true,
   },
   {
     title: 'Hebrew Pictographic Meaning',
@@ -94,11 +89,25 @@ const infoTabs: InfoTab[] = [
     showHebrew: true,
   },
   {
+    title: 'Hebrew Gematria',
+    icon: '🔢',
+    prompt: 'Show the gematria value of the selected Hebrew word. Also explain if any numerology of the word.',
+    purpose: 'word',
+    showHebrew: true,
+  },
+  {
     title: 'Greek Isopsephy',
     icon: '🔢',
-    prompt: 'Show the isopsephy value of the selected Greek word using the word.',
+    prompt:
+      'Show the isopsephy value of the selected Greek word using the word. Also explain if any numerology of the word.',
     purpose: 'word',
     showGreek: true,
+  },
+  {
+    title: 'Pronunciation',
+    icon: '🔊',
+    prompt: 'Show pronunciation of the selected word',
+    purpose: 'word',
   },
 
   // Verses
@@ -123,7 +132,7 @@ const infoTabs: InfoTab[] = [
   {
     title: 'All Interpretations',
     icon: '⚖️',
-    prompt: 'List all interpretations of the selected verse',
+    prompt: 'List ALL of the interpretations of the selected verse',
     purpose: 'verse',
   },
   {
@@ -135,19 +144,21 @@ const infoTabs: InfoTab[] = [
   {
     title: 'Jerome Commentary',
     icon: '📜',
-    prompt: "Show Saint Jerome's commentary on why he translated this verse in the way he did",
+    prompt: "Show Saint Jerome's commentary on why he translated this verse in the way he did.",
     purpose: 'verse',
   },
   {
-    title: 'Jerome',
-    icon: '🦁',
-    prompt: "Show Saint Jerome's understanding for the selected verse",
-    purpose: 'verse',
-  },
-  {
-    title: 'Augustine',
+    title: 'Fathers',
     icon: '⛪',
-    prompt: "Show Augustine's understanding for the selected verse",
+    prompt:
+      'Show the insights and unsterstanding of the verse from the following church founders: Augustine, Ambrose, Origen, Jerome',
+    purpose: 'verse',
+  },
+  {
+    title: 'More',
+    icon: '⛪',
+    prompt:
+      'Show the insights and unsterstanding of the verse from the following church founders: Chrysostom, Tertullian, Irenaeus, Cyprian, Athanasius, Basil, Gregory of Nazianzus, Gregory of Nyssa, John Chrysostom, Augustine of Hippo',
     purpose: 'verse',
   },
   {
@@ -159,13 +170,13 @@ const infoTabs: InfoTab[] = [
   {
     title: 'Kabbalism',
     icon: '🕎',
-    prompt: "Show Kabbalism's understanding for the selected verse",
+    prompt: "Elaborate deep into the Kabbalism's understanding for the selected verse, you may quote the Kabbalah.",
     purpose: 'verse',
   },
   {
-    title: 'Luther',
+    title: 'Reformation',
     icon: '📚',
-    prompt: "Show Luther's understanding for the selected verse",
+    prompt: 'Show the understanding of the selected verse from the reformers: Luther, Calvin, Zwingli, Knox',
     purpose: 'verse',
   },
   {
@@ -174,6 +185,26 @@ const infoTabs: InfoTab[] = [
     prompt: "Show the ancient Jewish tradition's understanding for the selected verse",
     purpose: 'verse',
     showHebrew: true,
+  },
+  {
+    title: 'Comparative Mythology',
+    icon: '🏛️',
+    prompt:
+      'Explain the selected verse in the context of comparative mythology.  Include any relevant parallels or allusions to myths, legends, or folklore from different cultures.  Focus on the themes, symbols, and archetypes present in the verse and how they resonate with broader mythological narratives. Make sure to include and mention the specific cultures.',
+    purpose: 'verse',
+  },
+  {
+    title: 'Greek Mythology',
+    icon: '🏛️',
+    prompt:
+      'Explain the selected verse in the context of Greek mythology. Include any relevant parallels or allusions to myths, legends, or folklore from ancient Greece. Focus on the themes, symbols, and archetypes present in the verse and how they resonate with broader mythological narratives. Make sure to include and mention the specific myths, gods, heroes, or monsters involved.',
+    purpose: 'verse',
+  },
+  {
+    title: 'Parallels in Apocrypha',
+    icon: '📜',
+    prompt: 'Show parallels from the Apocrypha or other non-canonical texts including Enoch.',
+    purpose: 'verse',
   },
 
   // AI GENERATED
@@ -185,27 +216,9 @@ const infoTabs: InfoTab[] = [
     purpose: 'verse',
   },
   {
-    title: 'Early Church Fathers',
-    icon: '⛪',
-    prompt: 'Summarize what the early Church Fathers wrote about this verse.',
-    purpose: 'verse',
-  },
-  {
     title: 'Theological Debates',
     icon: '⚔️',
     prompt: 'List theological debates or controversies surrounding this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Doctrinal Importance',
-    icon: '🛐',
-    prompt: 'Explain the doctrinal significance of the selected verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Parallels in Apocrypha',
-    icon: '📜',
-    prompt: 'Show parallels from the Apocrypha or other non-canonical texts.',
     purpose: 'verse',
   },
   {
@@ -228,9 +241,9 @@ const infoTabs: InfoTab[] = [
     purpose: 'verse',
   },
   {
-    title: 'Messianic Prophecies',
-    icon: '✝️',
-    prompt: 'Explain how this verse relates to messianic prophecies.',
+    title: 'Midrash',
+    icon: '📚',
+    prompt: 'Show Midrashic commentary on the selected verse.',
     purpose: 'verse',
   },
   {
@@ -248,79 +261,20 @@ const infoTabs: InfoTab[] = [
   {
     title: 'Ancient Manuscripts',
     icon: '🧾',
-    prompt: 'List significant differences in ancient manuscripts for the selected verse.',
+    prompt:
+      'List significant differences in ancient manuscripts for the selected verse. And show significant variant readings from ancient sources.',
     purpose: 'verse',
   },
   {
-    title: 'Variant Readings',
-    icon: '📜',
-    prompt: 'Show significant variant readings from ancient sources.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Qumran',
-    icon: '🏺',
-    prompt: 'Explain any connections between this verse and the Dead Sea Scrolls.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Gnostic Interpretation',
+    title: 'Gnostic',
     icon: '🌀',
     prompt: 'Show Gnostic interpretations of the selected verse.',
     purpose: 'verse',
   },
   {
-    title: 'Aramaic Targum',
-    icon: '📝',
-    prompt: 'Show how this verse was explained in Aramaic Targums.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Midrash',
-    icon: '📚',
-    prompt: 'Show Midrashic commentary on the selected verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Cultural References',
-    icon: '🎭',
-    prompt: 'List cultural references that come from this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Archeological Evidence',
-    icon: '🗿',
-    prompt: 'Provide archeological evidence supporting this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Artistic Representations',
-    icon: '🎨',
-    prompt: 'Show famous artistic representations inspired by this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Music or Hymns',
-    icon: '🎶',
-    prompt: 'List hymns or music inspired by this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Soteriology',
-    icon: '✝️',
-    prompt: 'Explain how this verse ties into the doctrine of salvation.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Eschatology',
-    icon: '🌅',
-    prompt: 'Explain eschatological interpretations of this verse.',
-    purpose: 'verse',
-  },
-  {
-    title: 'Angels/Demons',
+    title: 'Creatures',
     icon: '👼',
-    prompt: 'List any references to angels or demons in this verse.',
+    prompt: 'If relevant, explain the creatures or spirit beings in the verse from an alternative perspective.',
     purpose: 'verse',
   },
 ];
